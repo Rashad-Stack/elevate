@@ -9,6 +9,9 @@ export async function getPlansAction(page?: number): Promise<PaginatedPlanList |
 
     const response = await apiClient.plans.plansList(page)
 
+    console.log("🚀 ~ plans-action.ts:12 ~ getPlansAction ~ response:", response);
+
+
     return response
   } catch (error) {
     console.error('Failed to fetch plans:', error)

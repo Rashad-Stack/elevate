@@ -1,21 +1,20 @@
-import { redirect } from "next/navigation";
-import { Navbar } from "@/components/landing/navbar";
-import { Hero } from "@/components/landing/hero";
-import { CreatorsShowcase } from "@/components/landing/creators-showcase";
+import { getPlansAction } from "@/actions";
 import { ContentConsistency } from "@/components/landing/content-consistency";
-import { FeaturesStack } from "@/components/landing/features-stack";
-import { HowItWorks } from "@/components/landing/how-it-works";
 import { ContentSection } from "@/components/landing/content-section";
-import { PricingPlans } from "@/components/landing/pricing-plans";
-import { Testimonials } from "@/components/landing/testimonials";
+import { CreatorsShowcase } from "@/components/landing/creators-showcase";
 import { CTASection } from "@/components/landing/cta-section";
 import { FAQ } from "@/components/landing/faq";
-import { Footer } from "@/components/landing/footer";
+import { FeaturesStack } from "@/components/landing/features-stack";
 import { FloatingUsernameClaim } from "@/components/landing/floating-username-claim";
-import { getPlansAction } from "@/actions";
+import { Footer } from "@/components/landing/footer";
+import { Hero } from "@/components/landing/hero";
+import { HowItWorks } from "@/components/landing/how-it-works";
+import { Navbar } from "@/components/landing/navbar";
+import { PricingPlans } from "@/components/landing/pricing-plans";
+import { Testimonials } from "@/components/landing/testimonials";
 
 export default async function Home() {
-  redirect("https://start.elevate.social");
+  // redirect("https://start.elevate.social");
   // Fetch plans data on the server
   const plansData = await getPlansAction();
   return (

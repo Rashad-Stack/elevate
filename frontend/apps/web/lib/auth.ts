@@ -39,10 +39,16 @@ const authOptions: AuthOptions = {
 
           const data = await response.json()
 
+          console.log('Google auth response data:', data)
+
           if (response.status === 202 && data.requires_registration) {
             // New user - registration is disabled
             console.log('Registration is disabled. New Google users cannot sign up.')
-            return false
+                     // Existing user - proceed with login
+            user.access_token = data.access
+            user.refresh_token = data.refresh
+            user.backend_user = data.user
+            return true
           } else if (response.ok) {
             // Existing user - proceed with login
             user.access_token = data.access
@@ -83,6 +89,8 @@ const authOptions: AuthOptions = {
       return session
     },
     jwt: async ({ token, user, account, trigger, session }) => {
+      console.log('JWT Callback triggered:', { token, user, account, trigger, session })
+
       // Handle session update (when updateSession is called)
       if (trigger === 'update' && session) {
         // Update the token with new session data
@@ -97,11 +105,15 @@ const authOptions: AuthOptions = {
       }
 
       // Handle Google OAuth
+      console.log('Checking Google OAuth: account?.provider =', account?.provider, 'user?.access_token =', user?.access_token)
       if (account?.provider === 'google' && user?.access_token) {
+        console.log('Google provider detected, setting tokens')
+        console.log('user.access_token:', user.access_token)
         token.access = user.access_token
         token.refresh = user.refresh_token
         token.backend_user = user.backend_user
         token.username = user.backend_user?.username || user.backend_user?.email
+        console.log('Final token:', token)
         return token
       }
 
@@ -126,6 +138,7 @@ const authOptions: AuthOptions = {
         }
       }
 
+      console.log('JWT Callback final return token:', token)
       return token
     }
   },

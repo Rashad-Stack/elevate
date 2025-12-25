@@ -2,8 +2,8 @@
 
 import { getApiClient } from '@/lib/api'
 import { authOptions } from '@/lib/auth'
-import { 
-  ApiError, 
+import {
+  ApiError,
   type AccountLink,
   type AccountLinkResponse,
   type Balance,
@@ -34,6 +34,9 @@ export async function getStripeConnectAccountAction(): Promise<StripeConnectAcco
   try {
     const apiClient = await getApiClient(session)
     const response = await apiClient.stripeConnect.stripeConnectAccountRetrieve()
+
+    console.log("🚀 ~ stripe-connect-action.ts:38 ~ getStripeConnectAccountAction ~ response:", response);
+
     
     return response
   } catch (error) {
@@ -359,7 +362,7 @@ export async function getWebhookEventsAction(): Promise<Array<ConnectWebhookEven
 }
 
 // Type exports for convenience
-export type { 
+export type {
   AccountLink,
   AccountLinkResponse,
   Balance,

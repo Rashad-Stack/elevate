@@ -1,11 +1,14 @@
 import { withAuth } from 'next-auth/middleware'
 import { NextResponse } from 'next/server'
-import type { NextRequest } from 'next/server'
+
 
 export default withAuth(
   async function middleware(req) {
     const { pathname } = req.nextUrl
     const token = req.nextauth.token
+
+    console.log("🚀 ~ middleware.ts:10 ~ middleware ~ token:", token);
+
 
     // Only check for protected routes
     if (pathname.startsWith('/dashboard') || pathname.startsWith('/api/') && !pathname.startsWith('/api/auth')) {
@@ -34,6 +37,7 @@ export default withAuth(
           }
 
           if (!verifyResponse.ok) {
+            console.error('Verification failed with status:', verifyResponse.status)
             // Other error - redirect to login
             const url = new URL('/login', req.url)
             url.searchParams.set('error', 'verification_failed')

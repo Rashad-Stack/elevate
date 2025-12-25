@@ -98,6 +98,12 @@ class StripeConnectService:
         init_stripe()
 
         try:
+            # Ensure URLs use HTTPS for live mode
+            if not refresh_url.startswith('https://') and settings.STRIPE_SECRET_KEY.startswith('sk_live_'):
+                refresh_url = refresh_url.replace('http://', 'https://')
+            if not return_url.startswith('https://') and settings.STRIPE_SECRET_KEY.startswith('sk_live_'):
+                return_url = return_url.replace('http://', 'https://')
+
             account_link = stripe.AccountLink.create(
                 account=account_id,
                 refresh_url=refresh_url,
