@@ -1,0 +1,33 @@
+{
+  "default_branch": "main",
+  "branches": [
+    "ashar-dev01",
+    "dependabot/github_actions/actions/checkout-6",
+    "dependabot/github_actions/actions/setup-python-6",
+    "fahad-dev",
+    "feat/influencer",
+    "main",
+    "origin",
+    "testbranch"
+  ],
+  "parent": {
+    "ashar-dev01": "main",
+    "dependabot/github_actions/actions/checkout-6": "main",
+    "dependabot/github_actions/actions/setup-python-6": "main",
+    "fahad-dev": "main",
+    "feat/influencer": "main",
+    "main": null,
+    "origin": "main",
+    "testbranch": "main"
+  },
+  "order": [
+    "main",
+    "ashar-dev01",
+    "dependabot/github_actions/actions/checkout-6",
+    "dependabot/github_actions/actions/setup-python-6",
+    "fahad-dev",
+    "feat/influencer",
+    "origin",
+    "testbranch"
+  ]
+}
